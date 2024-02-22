@@ -13,9 +13,11 @@ import { DatabaseItemSchema } from "../schema.js";
 export async function parseLibraryFile(filename: string): Promise<Database> {
     const db: Database = [];
     // Pipe in file contents
-    const inStream = fs.createReadStream(filename).pipe(parse({
-        headers: ["title", "author", "isbn"]
-    }));
+    const inStream = fs.createReadStream(filename).pipe(
+        parse({
+            headers: ["title", "author", "isbn"]
+        })
+    );
     // Watch for items
     try {
         await new Promise<void>((resolve, reject) => {

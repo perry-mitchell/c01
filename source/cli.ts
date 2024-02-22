@@ -109,13 +109,11 @@ export async function runMainMenu(library: Library): Promise<void> {
 
 function runPrintBooks(library: Library): void {
     const items = library.getItems();
-    console.log(formatColumns([
-        ["Author", "Title", "ISBN"].map(value => chalk.bold.white(value)),
-        ...items.map(item => ([
-            item.author,
-            item.title,
-            chalk.yellow(item.isbn)
-        ]))
-    ]));
+    console.log(
+        formatColumns([
+            ["Author", "Title", "ISBN"].map(value => chalk.bold.white(value)),
+            ...items.map(item => [item.author, item.title, chalk.yellow(item.isbn)])
+        ])
+    );
     console.log("");
 }

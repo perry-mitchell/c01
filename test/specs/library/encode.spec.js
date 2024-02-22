@@ -4,8 +4,8 @@ import { fileURLToPath } from "node:url";
 import { expect } from "chai";
 import { writeLibraryFile } from "../../../dist/library/encode.js";
 
-describe("writeLibraryFile", function() {
-    beforeEach(function() {
+describe("writeLibraryFile", function () {
+    beforeEach(function () {
         const __dirname = fileURLToPath(new URL(".", import.meta.url));
         this.testFile = path.resolve(__dirname, "../../../dist/test.csv");
         this.db = [
@@ -23,15 +23,15 @@ describe("writeLibraryFile", function() {
                 author: "J. Jefferson",
                 title: "X marks the spot",
                 isbn: "0000000003"
-            },
+            }
         ];
     });
 
-    afterEach(async function() {
+    afterEach(async function () {
         await fs.unlink(this.testFile);
     });
 
-    it("writes a file to disk", async function() {
+    it("writes a file to disk", async function () {
         await writeLibraryFile(this.testFile, this.db);
         const contents = await fs.readFile(this.testFile, "utf8");
         const lines = contents.split(/\n/g);

@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import { parseCLIArgs } from "../../dist/args.js";
 
-describe("parseCLIArgs", function() {
-    it("parses args correctly", function() {
+describe("parseCLIArgs", function () {
+    it("parses args correctly", function () {
         const out = parseCLIArgs({
             _: ["filename.csv"]
         });
@@ -11,7 +11,7 @@ describe("parseCLIArgs", function() {
         });
     });
 
-    it("throws for invalid arguments", function() {
+    it("throws for invalid arguments", function () {
         expect(() => {
             parseCLIArgs({
                 _: []

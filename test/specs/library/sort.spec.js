@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import { sortDatabase } from "../../../dist/library/sort.js";
 
-describe("sortDatabase", function() {
-    it("sorts databases by author", function() {
+describe("sortDatabase", function () {
+    it("sorts databases by author", function () {
         const db = [
             {
                 author: "D. Dickens",
@@ -18,7 +18,7 @@ describe("sortDatabase", function() {
                 author: "J. Jefferson",
                 title: "X marks the spot",
                 isbn: "0000000000"
-            },
+            }
         ];
         sortDatabase(db);
         expect(db.map(item => item.author)).to.deep.equal([

@@ -8,12 +8,15 @@ export function parseCLIArgs(args: ParsedArgs): CLIArgs {
     try {
         return CLIArgsSchema.parse(args);
     } catch (err) {
-        throw new Layerr({
-            cause: err,
-            info: {
-                code: ErrorCode.BadArgs
-            }
-        }, "Failed parsing CLI arguments");
+        throw new Layerr(
+            {
+                cause: err,
+                info: {
+                    code: ErrorCode.BadArgs
+                }
+            },
+            "Failed parsing CLI arguments"
+        );
     }
 }
 
