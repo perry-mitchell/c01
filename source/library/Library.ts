@@ -1,9 +1,22 @@
-import { parseLibraryFile } from "./parse.js";
+import { Database } from "../types.js";
+import { parseLibraryFile } from "./decode.js";
+import { writeLibraryFile } from "./encode.js";
 
 export class Library {
     static async initialiseUsingFile(filename: string): Promise<Library> {
         const db = await parseLibraryFile(filename);
-        console.log(JSON.stringify(db, undefined, 2));
-        return new Library();
+        return new Library(filename, db);
+    }
+
+    protected _db: Database;
+    protected _filename: string;
+
+    constructor(filename: string, db: Database) {
+        this._filename = filename;
+        this._db = db;
+    }
+
+    async saveToFile() {
+        await writeLibraryFile(this._filename, this._db);
     }
 }

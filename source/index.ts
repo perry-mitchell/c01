@@ -11,6 +11,8 @@ async function init() {
     // Get library filename
     const filename = prepareAbsoluteFilename(args._[0]);
     const library = await Library.initialiseUsingFile(filename);
+    // Test
+    await library.saveToFile();
 }
 
 init().catch(err => {

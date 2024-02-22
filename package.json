@@ -36,6 +36,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@fast-csv/format": "^5.0.0",
     "@fast-csv/parse": "^5.0.0",
     "boxen": "^7.1.1",
     "chalk": "^5.3.0",
