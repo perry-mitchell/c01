@@ -1,0 +1,36 @@
+{
+  "name": "book-system",
+  "version": "0.0.0",
+  "description": "Book management system",
+  "exports": "./dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "run-s clean build:source",
+    "build:source": "tsc",
+    "clean": "rimraf dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/perry-mitchell/c01.git"
+  },
+  "keywords": [
+    "book",
+    "library",
+    "management",
+    "index"
+  ],
+  "author": "Perry Mitchell <perry@perrymitchell.net>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/perry-mitchell/c01/issues"
+  },
+  "homepage": "https://github.com/perry-mitchell/c01#readme",
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3"
+  }
+}
