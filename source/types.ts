@@ -10,3 +10,9 @@ export type DatabaseItem = z.infer<typeof DatabaseItemSchema>;
 export enum ErrorCode {
     BadArgs = "err/cli/args"
 }
+
+export enum LibraryAction {
+    AddBook = "add",
+    Exit = "exit",
+    Print = "print"
+}

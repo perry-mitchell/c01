@@ -1,6 +1,20 @@
 import boxen from "boxen";
 import chalk from "chalk";
+import inquirer from "inquirer";
 import { Library } from "./library/Library.js";
+import { DatabaseItem, LibraryAction } from "./types.js";
+import { DatabaseItemSchema } from "./schema.js";
+
+const TRANSFORM_INPUT = (value: string) => value.trim();
+const VALIDATE_ISBN_INPUT = (value: string) => /^(\d{10}|\d{13})$/.test(value);
+const VALIDATE_TEXT_INPUT = (value: string) => /[^\s]+/.test(value);
+
+export function printBookDetails(item: DatabaseItem): void {
+    console.log(`\tTitle:  ${chalk.green(item.title)}`);
+    console.log(`\tAuthor: ${item.author}`);
+    console.log(`\tISBN:   ${chalk.bold(item.isbn)}`);
+    console.log("");
+}
 
 export function printHeader(): void {
     console.log(
@@ -16,4 +30,71 @@ export function printLibraryInfo(library: Library): void {
     console.log(`\tDatabase: ${chalk.yellow(library.filename)}`);
     console.log(`\tBooks:    ${chalk.blue(library.count)}`);
     console.log("");
+}
+
+async function runAddBook(library: Library): Promise<void> {
+    const answers = await inquirer.prompt([
+        {
+            message: "Book Title",
+            name: "title",
+            transformer: TRANSFORM_INPUT,
+            type: "input",
+            validate: VALIDATE_TEXT_INPUT
+        },
+        {
+            message: "Book Author",
+            name: "author",
+            transformer: TRANSFORM_INPUT,
+            type: "input",
+            validate: VALIDATE_TEXT_INPUT
+        },
+        {
+            message: "ISBN",
+            name: "isbn",
+            transformer: TRANSFORM_INPUT,
+            type: "input",
+            validate: VALIDATE_ISBN_INPUT
+        }
+    ]);
+    const book = DatabaseItemSchema.parse(answers);
+    console.log("");
+    // Prompt to update
+    printBookDetails(book);
+    const confirmAnswers = await inquirer.prompt([
+        {
+            message: "Add this book to the library?",
+            name: "save",
+            type: "confirm"
+        }
+    ]);
+    if (confirmAnswers.save === true) {
+        library.addItem(book);
+        await library.saveToFile();
+        console.log(chalk.underline("Saved to database.\n"));
+    } else {
+        console.log(chalk.dim("Book was not saved to database.\n"));
+    }
+}
+
+export async function runMainMenu(library: Library): Promise<void> {
+    printLibraryInfo(library);
+    const answers = await inquirer.prompt([
+        {
+            choices: [
+                { name: "Add Book", value: LibraryAction.AddBook },
+                { name: "Print Books", value: LibraryAction.Print },
+                { name: "Exit", value: LibraryAction.Exit }
+            ],
+            message: "Choose library action",
+            name: "action",
+            type: "list"
+        }
+    ]);
+    switch (answers.action) {
+        case LibraryAction.AddBook:
+            await runAddBook(library);
+            return runMainMenu(library);
+        default:
+            throw new Error(`Unrecognised action: ${answers.action}`);
+    }
 }

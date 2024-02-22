@@ -1,4 +1,4 @@
-import { Database } from "../types.js";
+import { Database, DatabaseItem } from "../types.js";
 import { parseLibraryFile } from "./decode.js";
 import { writeLibraryFile } from "./encode.js";
 
@@ -22,6 +22,10 @@ export class Library {
 
     get filename(): string {
         return this._filename;
+    }
+
+    addItem(item: DatabaseItem): void {
+        this._db.push(item);
     }
 
     async saveToFile(): Promise<void> {
