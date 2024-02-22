@@ -10,6 +10,8 @@ import { DatabaseItemSchema } from "../schema.js";
  *  It may be in TSV or CSV format..
  * @param filename The full path to the library file
  * @returns An array of books (ie. the database)
+ * @example
+ *  const library = await parseLibraryFile("./test.csv");
  */
 export async function parseLibraryFile(filename: string): Promise<Database> {
     const db: Database = [];

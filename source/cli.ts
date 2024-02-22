@@ -10,6 +10,10 @@ const TRANSFORM_INPUT = (value: string) => value.trim();
 const VALIDATE_ISBN_INPUT = (value: string) => /^(\d{10}|\d{13})$/.test(value);
 const VALIDATE_TEXT_INPUT = (value: string) => /[^\s]+/.test(value);
 
+/**
+ * Print a book's details to stdout
+ * @param item The database item (book)
+ */
 export function printBookDetails(item: DatabaseItem): void {
     console.log(`\tTitle:  ${chalk.green(item.title)}`);
     console.log(`\tAuthor: ${item.author}`);
@@ -17,6 +21,9 @@ export function printBookDetails(item: DatabaseItem): void {
     console.log("");
 }
 
+/**
+ * Print the main program header/logo
+ */
 export function printHeader(): void {
     console.log(
         boxen(
@@ -27,12 +34,22 @@ export function printHeader(): void {
     );
 }
 
+/**
+ * Print the library info to stdout
+ * @param library The current library instance
+ */
 export function printLibraryInfo(library: Library): void {
     console.log(`\tDatabase: ${chalk.yellow(library.filename)}`);
     console.log(`\tBooks:    ${chalk.blue(library.count)}`);
     console.log("");
 }
 
+/**
+ * Run the add-book menu/prompt, where a user can input
+ *  a new book's details and choose to save them to the
+ *  library database
+ * @param library The current library instance
+ */
 async function runAddBook(library: Library): Promise<void> {
     const answers = await inquirer.prompt([
         {
@@ -77,6 +94,10 @@ async function runAddBook(library: Library): Promise<void> {
     }
 }
 
+/**
+ * Run the main menu prompt
+ * @param library The current library instance
+ */
 export async function runMainMenu(library: Library): Promise<void> {
     printLibraryInfo(library);
     const answers = await inquirer.prompt([
@@ -107,6 +128,11 @@ export async function runMainMenu(library: Library): Promise<void> {
     }
 }
 
+/**
+ * Run the print-books procedure, where all current book
+ *  items are printed to stdout
+ * @param library The current library instance
+ */
 function runPrintBooks(library: Library): void {
     const items = library.getItems();
     console.log(

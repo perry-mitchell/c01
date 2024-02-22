@@ -1,5 +1,9 @@
 import { z } from "zod";
 
+/**
+ * Command line argument schema, for arguments passed into
+ *  the program
+ */
 export const CLIArgsSchema = z
     .object({
         _: z
@@ -9,6 +13,10 @@ export const CLIArgsSchema = z
     })
     .strict();
 
+/**
+ * Database item (book) schema, for each individual item
+ *  stored in the database
+ */
 export const DatabaseItemSchema = z.object({
     author: z.string().min(1),
     isbn: z
@@ -17,4 +25,7 @@ export const DatabaseItemSchema = z.object({
     title: z.string().min(1)
 });
 
+/**
+ * Overall database collection schema
+ */
 export const DatabaseSchema = z.array(DatabaseItemSchema);
