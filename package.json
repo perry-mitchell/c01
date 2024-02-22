@@ -1,5 +1,5 @@
 {
-  "name": "book-system",
+  "name": "@perrymitchell/book-system",
   "version": "0.0.0",
   "description": "Book management system",
   "exports": "./dist/index.js",
@@ -10,9 +10,13 @@
     "build:source": "tsc",
     "clean": "rimraf dist",
     "make:executable": "chmod +x ./dist/index.js",
+    "prepublishOnly": "npm run build",
     "start": "npm run build && node ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "dist/**/*"
+  ],
   "bin": {
     "books": "./dist/index.js"
   },
