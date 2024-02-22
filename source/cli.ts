@@ -1,5 +1,6 @@
 import boxen from "boxen";
 import chalk from "chalk";
+import { Library } from "./library/Library.js";
 
 export function printHeader(): void {
     console.log(
@@ -9,4 +10,10 @@ export function printHeader(): void {
         ),
         "\n"
     );
+}
+
+export function printLibraryInfo(library: Library): void {
+    console.log(`\tDatabase: ${chalk.yellow(library.filename)}`);
+    console.log(`\tBooks:    ${chalk.blue(library.count)}`);
+    console.log("");
 }

@@ -1,6 +1,6 @@
 import minimist from "minimist";
 import { parseCLIArgs, prepareAbsoluteFilename } from "./args.js";
-import { printHeader } from "./cli.js";
+import { printHeader, printLibraryInfo } from "./cli.js";
 import { Library } from "./library/Library.js";
 
 async function init() {
@@ -11,8 +11,9 @@ async function init() {
     // Get library filename
     const filename = prepareAbsoluteFilename(args._[0]);
     const library = await Library.initialiseUsingFile(filename);
+    printLibraryInfo(library);
     // Test
-    await library.saveToFile();
+    // await library.saveToFile();
 }
 
 init().catch(err => {

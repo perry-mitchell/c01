@@ -16,7 +16,15 @@ export class Library {
         this._db = db;
     }
 
-    async saveToFile() {
+    get count(): number {
+        return this._db.length;
+    }
+
+    get filename(): string {
+        return this._filename;
+    }
+
+    async saveToFile(): Promise<void> {
         await writeLibraryFile(this._filename, this._db);
     }
 }
