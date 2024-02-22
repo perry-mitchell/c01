@@ -41,6 +41,7 @@
     "@fast-csv/parse": "^5.0.0",
     "boxen": "^7.1.1",
     "chalk": "^5.3.0",
+    "colm": "^0.1.1",
     "inquirer": "^9.2.15",
     "layerr": "^2.0.1",
     "minimist": "^1.2.8",

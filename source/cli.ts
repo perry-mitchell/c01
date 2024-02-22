@@ -1,6 +1,7 @@
 import boxen from "boxen";
 import chalk from "chalk";
 import inquirer from "inquirer";
+import formatColumns from "colm";
 import { Library } from "./library/Library.js";
 import { DatabaseItem, LibraryAction } from "./types.js";
 import { DatabaseItemSchema } from "./schema.js";
@@ -90,11 +91,28 @@ export async function runMainMenu(library: Library): Promise<void> {
             type: "list"
         }
     ]);
+    console.log("");
     switch (answers.action) {
         case LibraryAction.AddBook:
             await runAddBook(library);
             return runMainMenu(library);
+        case LibraryAction.Print:
+            runPrintBooks(library);
+            return runMainMenu(library);
         default:
             throw new Error(`Unrecognised action: ${answers.action}`);
     }
+}
+
+function runPrintBooks(library: Library): void {
+    const items = library.getItems();
+    console.log(formatColumns([
+        ["Author", "Title", "ISBN"].map(value => chalk.bold.white(value)),
+        ...items.map(item => ([
+            item.author,
+            item.title,
+            chalk.yellow(item.isbn)
+        ]))
+    ]));
+    console.log("");
 }

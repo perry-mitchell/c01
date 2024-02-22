@@ -1,6 +1,7 @@
 import { Database, DatabaseItem } from "../types.js";
 import { parseLibraryFile } from "./decode.js";
 import { writeLibraryFile } from "./encode.js";
+import { sortDatabase } from "./sort.js";
 
 export class Library {
     static async initialiseUsingFile(filename: string): Promise<Library> {
@@ -26,6 +27,12 @@ export class Library {
 
     addItem(item: DatabaseItem): void {
         this._db.push(item);
+    }
+
+    getItems(): Array<DatabaseItem> {
+        const items = [...this._db];
+        sortDatabase(items);
+        return items;
     }
 
     async saveToFile(): Promise<void> {
