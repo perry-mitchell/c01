@@ -99,6 +99,9 @@ export async function runMainMenu(library: Library): Promise<void> {
         case LibraryAction.Print:
             runPrintBooks(library);
             return runMainMenu(library);
+        case LibraryAction.Exit:
+            console.log(chalk.bold.red("Bye!"));
+            break;
         default:
             throw new Error(`Unrecognised action: ${answers.action}`);
     }
