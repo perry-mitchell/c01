@@ -16,7 +16,7 @@ export async function writeLibraryFile(filename: string, db: Database): Promise<
     const clone = structuredClone(db);
     sortDatabase(clone);
     // Process
-    for (const book of db) {
+    for (const book of clone) {
         csvStream.write(book);
     }
     csvStream.end();
