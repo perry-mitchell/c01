@@ -2,6 +2,8 @@
 
 _Book management system for the terminal._
 
+![Tests status](https://github.com/perry-mitchell/c01/actions/workflows/test.yml/badge.svg)
+
 ## About
 
 This application provides a terminal interface with which to manage a library book system. The application reads books from a database file (in **CSV format**), allowing the user to add to the database or print all of the current books contained within it.
