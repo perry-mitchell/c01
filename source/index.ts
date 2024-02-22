@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import minimist from "minimist";
 import { parseCLIArgs, prepareAbsoluteFilename } from "./args.js";
 import { printHeader, runMainMenu } from "./cli.js";
