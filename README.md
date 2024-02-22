@@ -37,6 +37,10 @@ npm start -- path_to_file.csv
 
 The file path may be relative or absolute.
 
+### Tests
+
+You can run the unit tests by simply calling `npm test`. The tests execute all current specs and checks to see that the coverage is still at an acceptable amount.
+
 ## Production Usage
 
 This application can also be run directly by invoking `npx`:
