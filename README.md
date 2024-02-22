@@ -39,6 +39,8 @@ npm start -- path_to_file.csv
 
 The file path may be relative or absolute.
 
+_Note that the project comes with a sample database, `sample.db.csv`, so you can use that to quickly test: `npm start -- ./sample.db.csv`._
+
 ### Tests
 
 You can run the unit tests by simply calling `npm test`. The tests execute all current specs and checks to see that the coverage is still at an acceptable amount.
@@ -50,3 +52,11 @@ This application can also be run directly by invoking `npx`:
 ```shell
 npx @perrymitchell/book-system path_to_file.csv
 ```
+
+_New_ databases can be created by simply referring to a file that doesn't exist yet:
+
+```shell
+npx @perrymitchell/book-system ./no-file-yet.csv
+```
+
+Once saved, the new database will be created at the provided path.

@@ -73,6 +73,7 @@
     "inquirer": "^9.2.15",
     "layerr": "^2.0.1",
     "minimist": "^1.2.8",
+    "path-exists": "^5.0.0",
     "zod": "^3.22.4"
   }
 }

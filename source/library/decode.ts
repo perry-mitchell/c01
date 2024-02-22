@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import { parse } from "@fast-csv/parse";
 import { Layerr } from "layerr";
+import { pathExists } from "path-exists";
 import { Database } from "../types.js";
 import { DatabaseItemSchema } from "../schema.js";
 
@@ -12,6 +13,12 @@ import { DatabaseItemSchema } from "../schema.js";
  */
 export async function parseLibraryFile(filename: string): Promise<Database> {
     const db: Database = [];
+    // Check if it's a new file or not
+    const exists = await pathExists(filename);
+    if (!exists) {
+        // We can return an empty database
+        return db;
+    }
     // Pipe in file contents
     const inStream = fs.createReadStream(filename).pipe(
         parse({
