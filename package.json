@@ -17,9 +17,7 @@
   "files": [
     "dist/**/*"
   ],
-  "bin": {
-    "books": "./dist/index.js"
-  },
+  "bin": "./dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/perry-mitchell/c01.git"
